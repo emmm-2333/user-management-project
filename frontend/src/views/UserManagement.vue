@@ -6,6 +6,7 @@
       <div>用户管理</div>
       <div>
         <el-button type="primary" @click="openDialog()">新增用户</el-button>
+        <el-button @click="onLogout">退出登录</el-button>
       </div>
     </el-header>
     <!-- 页面主体 -->
@@ -76,7 +77,11 @@
 import { ref, reactive, computed, onMounted } from 'vue';
 import { ElMessage } from 'element-plus';
 import { fetchUsers, createUser, updateUser, deleteUser } from '../api/user';
+import { useUserStore } from '../stores/user';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+const userStore = useUserStore();
 const query = reactive({ page: 1, size: 10 });
 const list = ref([]);
 const total = ref(0);
@@ -140,6 +145,12 @@ const onDelete = async (id) => {
 const onPageChange = (page) => {
   query.page = page;
   load();
+};
+
+const onLogout = () => {
+  userStore.logout();
+  ElMessage.success('已退出登录');
+  router.push('/login');
 };
 </script>
 
