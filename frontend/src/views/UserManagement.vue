@@ -6,7 +6,6 @@
       <div>用户管理</div>
       <div>
         <el-button type="primary" @click="openDialog()">新增用户</el-button>
-        <el-button @click="goChat">返回对话</el-button>
       </div>
     </el-header>
     <!-- 页面主体 -->
@@ -77,9 +76,7 @@
 import { ref, reactive, computed, onMounted } from 'vue';
 import { ElMessage } from 'element-plus';
 import { fetchUsers, createUser, updateUser, deleteUser } from '../api/user';
-import { useRouter } from 'vue-router';
 
-const router = useRouter();
 const query = reactive({ page: 1, size: 10 });
 const list = ref([]);
 const total = ref(0);
@@ -144,8 +141,6 @@ const onPageChange = (page) => {
   query.page = page;
   load();
 };
-
-const goChat = () => router.push('/chat');
 </script>
 
 <style scoped>

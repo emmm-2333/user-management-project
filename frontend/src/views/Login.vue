@@ -49,7 +49,7 @@ const onSubmit = () => {
       store.setToken(res.data.token);
       store.setProfile(res.data.user);
       ElMessage.success('登录成功');
-      router.push('/chat');
+      router.push('/users');
     } catch (err) {
       // error handled globally
     } finally {
